@@ -1,0 +1,29 @@
+# Carpetas completas a ignorar
+configs/csdm/
+data/gamedata/
+data/sqlite3/
+data/vault/
+dlls/
+modules/
+plugins/
+
+# En scripting, ignorar subcarpetas completas
+scripting/amxmod_compat/
+scripting/compiled/
+scripting/testsuite/
+scripting/zp50/
+
+# Ignorar todo lo que no sea .sma en scripting
+scripting/*
+!scripting/**/*.sma
+
+# O también puedes usar esto si no quieres recursividad:
+# !scripting/*.sma
+
+# Ignorar ejecutables, logs, compiladores, etc.
+scripting/*.exe
+scripting/*.dll
+scripting/*.sh
+scripting/*.bat
+scripting/*.log
+scripting/*.dat

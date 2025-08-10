@@ -1,0 +1,11 @@
+compiled/
+amxxpc
+amxxpc.exe
+amxxpc32.dll
+amxxpc_osx
+*.log
+*.dat
+*.exe
+*.dll
+*.bak
+*.tmp

@@ -63,7 +63,7 @@ stock Float:obtener_potencia_salto(id)
     else // Humano
     {
         if (zp_get_resortes(id))
-            potencia += 110.0;
+            potencia += 150.0;
     }
 
     // Aquí puedes agregar más condiciones, como otros ítems, perks, estados, etc.

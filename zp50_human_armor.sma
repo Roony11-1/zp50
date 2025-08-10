@@ -88,8 +88,16 @@ public zp_fw_core_cure_post(id, attacker)
 	new class_id = zp_class_human_get_current(id)
 	new max_armor = zp_class_human_get_max_armor(id, class_id)
 
-	if (armor > float(max_armor))
-		set_pev(id, pev_armorvalue, float(max_armor))
+	if (is_user_bot(id))
+	{
+		set_pev(id, pev_armorvalue, 0.0)
+		set_pev(id, pev_armorvalue, float(min(random_num(1, max_armor-(random_num(1, (max_armor/50)))), max_armor)))
+	}
+	else // No bots
+	{
+		if (armor > float(max_armor))
+			set_pev(id, pev_armorvalue, float(max_armor))
+	}
 }
 
 public fw_TakeDamage(victim, inflictor, attacker, Float:damage, damage_type)

@@ -78,72 +78,72 @@ public zp_fw_gamemodes_start(game_mode_id)
         case 0:
         {
             formatex(name, sizeof(name), "Infección");
-            r = get_pcvar_num(cvar_zombie_color[0])
-            g = get_pcvar_num(cvar_zombie_color[1])
-            b = get_pcvar_num(cvar_zombie_color[2])
+            r = cvar_zombie_color[0];
+            g = cvar_zombie_color[1];
+            b = cvar_zombie_color[2];
         }
         case 1:
         {
             formatex(name, sizeof(name), "Infección Múltiple");
-            r = 200
-            g = 50
-            b = 0
+            r = 200;
+            g = 50;
+            b = 0;
         }
         case 2:
         {
             formatex(name, sizeof(name), "Swarm");
-            r = 100
-            g = 255
-            b = 100
+            r = 100;
+            g = 255;
+            b = 100;
         }
         case 3:
         {
             formatex(name, sizeof(name), "Nemesis");
-            r = get_pcvar_num(cvar_nemesis_color[0])
-            g = get_pcvar_num(cvar_nemesis_color[1])
-            b = get_pcvar_num(cvar_nemesis_color[2])
+            r = cvar_nemesis_color[0];
+            g = cvar_nemesis_color[1];
+            b = cvar_nemesis_color[2];
         }
         case 4:
         {
             formatex(name, sizeof(name), "Depredador");
-            r = get_pcvar_num(cvar_depredador_color[0])
-            g = get_pcvar_num(cvar_depredador_color[1])
-            b = get_pcvar_num(cvar_depredador_color[2])
+            r = cvar_depredador_color[0];
+            g = cvar_depredador_color[1];
+            b = cvar_depredador_color[2];
         }
         case 5:
         {
             formatex(name, sizeof(name), "Survivor");
-            r = get_pcvar_num(cvar_survivor_color[0])
-            g = get_pcvar_num(cvar_survivor_color[1])
-            b = get_pcvar_num(cvar_survivor_color[2])
+            r = cvar_survivor_color[0];
+            g = cvar_survivor_color[1];
+            b = cvar_survivor_color[2];
         }
         case 6:
         {
             formatex(name, sizeof(name), "Plague");
-            r = 0
-            g = 50
-            b = 200
+            r = 0;
+            g = 50;
+            b = 200;
         }
         case 7:
         {
             formatex(name, sizeof(name), "Armageddon");
-            r = 255
-            g = 50
-            b = 255
+            r = 255;
+            g = 50;
+            b = 255;
         }
         case 8:
         {
             formatex(name, sizeof(name), "Sobrevivir");
-            r = 20
-            g = 255
-            b = 255
+            r = 20;
+            g = 255;
+            b = 255;
         }
         default:
         {
             formatex(name, sizeof(name), "Desconocido");
-            r = 255
-            g = 255
-            b = 255
+            r = 255;
+            g = 255;
+            b = 255;
         }
     }
 
@@ -153,9 +153,9 @@ public zp_fw_gamemodes_start(game_mode_id)
 public zp_fw_gamemodes_end(game_mode_id)
 {
     formatex(g_desc, charsmax(g_desc), "Modalidad Terminada");
-    r = 35
-    g = 255
-    b = 255
+    r = 35;
+    g = 255;
+    b = 255;
 }
 
 public task_show_info(taskid)

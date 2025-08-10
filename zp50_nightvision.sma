@@ -365,9 +365,9 @@ public custom_nightvision_task(taskid)
 		else
 		{
 			// Free look → blanco
-			r = get_pcvar_num(cvar_spec_color[0])
-			g = get_pcvar_num(cvar_spec_color[1])
-			b = get_pcvar_num(cvar_spec_color[2])
+			r = cvar_spec_color[0]
+			g = cvar_spec_color[1]
+			b = cvar_spec_color[2]
 		}
 	}
 	else
@@ -390,42 +390,42 @@ stock get_player_nightvision_color(id, &r, &g, &b)
 		// Si tiene Furia Zombie, tomar color del aura de furia
         if (zp_item_zombie_madness_get(id))
         {
-            r = get_pcvar_num(cvar_madness_color[0]);
-            g = get_pcvar_num(cvar_madness_color[1]);
-            b = get_pcvar_num(cvar_madness_color[2]);
+            r = cvar_madness_color[0]
+            g = cvar_madness_color[1]
+            b = cvar_madness_color[2]
         }
 		else if (LibraryExists(LIBRARY_NEMESIS, LibType_Library) && zp_class_nemesis_get(id))
 		{
-			r = get_pcvar_num(cvar_nemesis_color[0])
-			g = get_pcvar_num(cvar_nemesis_color[1])
-			b = get_pcvar_num(cvar_nemesis_color[2])
+			r = cvar_nemesis_color[0]
+			g = cvar_nemesis_color[1]
+			b = cvar_nemesis_color[2]
 		}
 		else if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library) && zp_class_depredador_get(id))
 		{
-			r = get_pcvar_num(cvar_depredador_color[0])
-			g = get_pcvar_num(cvar_depredador_color[1])
-			b = get_pcvar_num(cvar_depredador_color[2])
+			r = cvar_depredador_color[0]
+			g = cvar_depredador_color[1]
+			b = cvar_depredador_color[2]
 		}
 		else
 		{
-			r = get_pcvar_num(cvar_zombie_color[0])
-			g = get_pcvar_num(cvar_zombie_color[1])
-			b = get_pcvar_num(cvar_zombie_color[2])
+			r = cvar_zombie_color[0]
+			g = cvar_zombie_color[1]
+			b = cvar_zombie_color[2]
 		}
 	}
 	else
 	{
 		if (LibraryExists(LIBRARY_SURVIVOR, LibType_Library) && zp_class_survivor_get(id))
 		{
-			r = get_pcvar_num(cvar_survivor_color[0])
-			g = get_pcvar_num(cvar_survivor_color[1])
-			b = get_pcvar_num(cvar_survivor_color[2])
+			r = cvar_survivor_color[0]
+			g = cvar_survivor_color[1]
+			b = cvar_survivor_color[2]
 		}
 		else
 		{
-			r = get_pcvar_num(cvar_human_color[0])
-			g = get_pcvar_num(cvar_human_color[1])
-			b = get_pcvar_num(cvar_human_color[2])
+			r = cvar_human_color[0]
+			g = cvar_human_color[1]
+			b = cvar_human_color[2]
 		}
 	}
 }

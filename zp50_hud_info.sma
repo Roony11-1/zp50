@@ -25,6 +25,7 @@
 #include <zp50_ammopacks>
 #define LIBRARY_ZOMBIE_MADNESS "zp50_item_zombie_madness"
 #include <zp50_item_zombie_madness>
+#include <zp50_stocks>
 #include <zp50_color_const>
 
 const Float:HUD_SPECT_X = 0.01
@@ -192,7 +193,7 @@ ShowPlayerInfoHUD(viewer, target, const class_name[])
 	set_hudmessage(r, g, b, x, y, 0, 6.0, 1.1, 0.0, 0.0, -1)
 
 	new hud_text[128], extra[32]
-	if (!(zp_core_is_zombie(target) || get_player_super_human_class(target)))
+	if (!(zp_core_is_zombie(target) || zp_is_super_class(target)))
 		formatex(extra, charsmax(extra), "Armadura: %d^n", get_user_armor(target))
 	else
 		formatex(extra, charsmax(extra), "")
@@ -228,30 +229,30 @@ get_player_hud_color(player, &r, &g, &b)
 		// Si tiene Furia Zombie, tomar color del aura de furia
 		if (zp_item_zombie_madness_get(player))
 		{
-			r = get_pcvar_num(cvar_madness_color[0]);
-			g = get_pcvar_num(cvar_madness_color[1]);
-			b = get_pcvar_num(cvar_madness_color[2]);
+			r = cvar_madness_color[0];
+			g = cvar_madness_color[1];
+			b = cvar_madness_color[2];
 			//server_print("Jugador %d tiene Furia Zombie: color R=%d G=%d B=%d\n", player, r, g, b);
 		}
 		else if (LibraryExists(LIBRARY_NEMESIS, LibType_Library) && zp_class_nemesis_get(player))
 		{
-			r = get_pcvar_num(cvar_nemesis_color[0]);
-			g = get_pcvar_num(cvar_nemesis_color[1]);
-			b = get_pcvar_num(cvar_nemesis_color[2]);
+			r = cvar_nemesis_color[0];
+			g = cvar_nemesis_color[1];
+			b = cvar_nemesis_color[2];
 			//server_print("Jugador %d es Nemesis: color R=%d G=%d B=%d\n", player, r, g, b);
 		}
 		else if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library) && zp_class_depredador_get(player))
 		{
-			r = get_pcvar_num(cvar_depredador_color[0]);
-			g = get_pcvar_num(cvar_depredador_color[1]);
-			b = get_pcvar_num(cvar_depredador_color[2]);
+			r = cvar_depredador_color[0];
+			g = cvar_depredador_color[1];
+			b = cvar_depredador_color[2];
 			//server_print("Jugador %d es Depredador: color R=%d G=%d B=%d\n", player, r, g, b);
 		}
 		else
 		{
-			r = get_pcvar_num(cvar_zombie_color[0]);
-			g = get_pcvar_num(cvar_zombie_color[1]);
-			b = get_pcvar_num(cvar_zombie_color[2]);
+			r = cvar_zombie_color[0];
+			g = cvar_zombie_color[1];
+			b = cvar_zombie_color[2];
 			//server_print("Jugador %d es Zombie normal: color R=%d G=%d B=%d\n", player, r, g, b);
 		}
 	}
@@ -259,20 +260,15 @@ get_player_hud_color(player, &r, &g, &b)
 	{
 		if (LibraryExists(LIBRARY_SURVIVOR, LibType_Library) && zp_class_survivor_get(player))
 		{
-			r = get_pcvar_num(cvar_survivor_color[0]);
-			g = get_pcvar_num(cvar_survivor_color[1]);
-			b = get_pcvar_num(cvar_survivor_color[2]);
+			r = cvar_survivor_color[0];
+			g = cvar_survivor_color[1];
+			b = cvar_survivor_color[2];
 		}
 		else
 		{
-			r = get_pcvar_num(cvar_human_color[0]);
-			g = get_pcvar_num(cvar_human_color[1]);
-			b = get_pcvar_num(cvar_human_color[2]);
+			r = cvar_human_color[0];
+			g = cvar_human_color[1];
+			b = cvar_human_color[2];
 		}
 	}
-}
-
-get_player_super_human_class(id)
-{
-	return (zp_class_survivor_get(id))
 }

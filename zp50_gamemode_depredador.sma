@@ -208,6 +208,6 @@ showDHud(id)
 	get_user_name(id, name, charsmax(name))
 	static szMsg[128]
 	format(szMsg, charsmax(szMsg), "%L", LANG_PLAYER, "NOTICE_DEPREDADOR", name)
-	set_hudmessage(get_pcvar_num(cvar_depredador_color[0]), get_pcvar_num(cvar_depredador_color[1]), get_pcvar_num(cvar_depredador_color[2]), HUD_EVENT_X, HUD_EVENT_Y, 1, 0.0, 5.0, 1.0, 1.0, -1)
+	set_hudmessage(cvar_depredador_color[0], cvar_depredador_color[1], cvar_depredador_color[2], HUD_EVENT_X, HUD_EVENT_Y, 1, 0.0, 5.0, 1.0, 1.0, -1)
 	show_dhudmessage(0, szMsg)
 }

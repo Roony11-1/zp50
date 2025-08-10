@@ -124,9 +124,9 @@ stock efectoPulse(id)
     new origin[3];
     get_user_origin(id, origin);
 
-    new r = get_pcvar_num(cvar_pulse_color[0]);
-    new g = get_pcvar_num(cvar_pulse_color[1]);
-    new b = get_pcvar_num(cvar_pulse_color[2]);
+    new r = cvar_pulse_color[0];
+    new g = cvar_pulse_color[1];
+    new b = cvar_pulse_color[2];
 
     apply_knockback_and_fade(id, origin, r, g, b);
     show_beam_ring(origin, r, g, b);

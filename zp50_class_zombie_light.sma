@@ -1,0 +1,67 @@
+/*================================================================================
+	
+	---------------------------------
+	-*- [ZP] Class: Zombie: Light -*-
+	---------------------------------
+	
+	This plugin is part of Zombie Plague Mod and is distributed under the
+	terms of the GNU General Public License. Check ZP_ReadMe.txt for details.
+	
+================================================================================*/
+
+#include <amxmodx>
+#include <zp50_class_zombie>
+
+// Light Zombie Attributes
+new const zombieclass3_name[] = "Light Zombie"
+new const zombieclass3_models[][] = { "zombie_source" }
+new const zombieclass1_info[] = "Salta más que otros"
+new const zombieclass1_shortinfo[] = "Ligero"
+new const zombieclass3_clawmodels[][] = { "models/zombie_plague/v_knife_zombie.mdl" }
+
+new cvar_zombie_classic_health, cvar_zombie_classic_speed, cvar_zombie_classic_gravity, cvar_zombie_classic_knockback;
+new cvar_zombie_health, cvar_zombie_speed, cvar_zombie_gravity, cvar_zombie_knockback;
+new Float:g_zombie_health, g_zombie_speed, g_zombie_gravity, g_zombie_knockback, cvar_zombie_jump;
+
+new g_ZombieClassID
+
+public plugin_precache()
+{
+    register_plugin("[ZP] Class: Zombie: Light", ZP_VERSION_STRING, "ZP Dev Team")
+
+    // Registrar cvars
+    cvar_zombie_classic_health = register_cvar("zp_classic_zombie_health", "2250");
+    cvar_zombie_classic_speed = register_cvar("zp_classic_zombie_speed", "0.95");
+    cvar_zombie_classic_gravity = register_cvar("zp_classic_zombie_gravity", "1");
+    cvar_zombie_classic_knockback = register_cvar("zp_classic_zombie_knockback", "1");
+
+    cvar_zombie_health = register_cvar("zp_zombie_light_health", "0.750");
+    cvar_zombie_speed = register_cvar("zp_zombie_light_speed", "1.0");
+    cvar_zombie_gravity = register_cvar("zp_zombie_light_gravity", "0.9");
+    cvar_zombie_knockback = register_cvar("zp_zombie_light_knockback", "0.750");
+    cvar_zombie_jump = register_cvar("zp_light_zombie_jump", "110")
+
+    // Obtener valores y registrar clase
+    g_zombie_health = get_pcvar_num(cvar_zombie_classic_health) * get_pcvar_float(cvar_zombie_health);
+    g_zombie_speed = get_pcvar_float(cvar_zombie_classic_speed) * get_pcvar_float(cvar_zombie_speed);
+    g_zombie_gravity = get_pcvar_float(cvar_zombie_classic_gravity) * get_pcvar_float(cvar_zombie_gravity);
+    g_zombie_knockback = get_pcvar_float(cvar_zombie_classic_knockback) * get_pcvar_float(cvar_zombie_knockback);
+
+    g_ZombieClassID = zp_class_zombie_register(
+        zombieclass3_name,
+        zombieclass1_info,
+        floatround(g_zombie_health),
+        g_zombie_speed,
+        g_zombie_gravity,
+		zombieclass1_shortinfo,
+        get_pcvar_num(cvar_zombie_jump)
+    );
+
+    zp_class_zombie_register_kb(g_ZombieClassID, g_zombie_knockback);
+
+    new index;
+    for (index = 0; index < sizeof zombieclass3_models; index++)
+        zp_class_zombie_register_model(g_ZombieClassID, zombieclass3_models[index]);
+    for (index = 0; index < sizeof zombieclass3_clawmodels; index++)
+        zp_class_zombie_register_claw(g_ZombieClassID, zombieclass3_clawmodels[index]);
+}

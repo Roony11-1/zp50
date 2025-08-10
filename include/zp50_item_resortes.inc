@@ -1,0 +1,1 @@
+native zp_get_resortes(id)

@@ -1,0 +1,1 @@
+native bool:zp_is_super_class(id)

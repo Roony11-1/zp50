@@ -24,6 +24,7 @@
 #include <zp50_grenade_frost>
 #define LIBRARY_GRENADE_FIRE "zp50_grenade_fire"
 #include <zp50_grenade_fire>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -62,7 +63,7 @@ new g_IsNemesis, g_IsMutated
 
 new cvar_nemesis_health, cvar_nemesis_base_health, cvar_nemesis_speed, cvar_nemesis_gravity
 new cvar_nemesis_glow
-new cvar_nemesis_aura, cvar_nemesis_color[3], r, g, b
+new cvar_nemesis_aura, r, g, b
 new cvar_nemesis_damage, cvar_nemesis_kill_explode
 new cvar_nemesis_grenade_frost, cvar_nemesis_grenade_fire
 new g_nemesis_max_health[33]
@@ -85,10 +86,10 @@ public plugin_init()
 	cvar_nemesis_gravity = register_cvar("zp_nemesis_gravity", "0.5")
 	cvar_nemesis_glow = register_cvar("zp_nemesis_glow", "1")
 	cvar_nemesis_aura = register_cvar("zp_nemesis_aura", "1")
-	// Color
-	cvar_nemesis_color[0] = register_cvar("zp_nemesis_color_R", "255")
-	cvar_nemesis_color[1] = register_cvar("zp_nemesis_color_G", "255")
-	cvar_nemesis_color[2] = register_cvar("zp_nemesis_color_B", "0")
+
+	r = ZP_COLOR_NEMESIS_R;
+	g = ZP_COLOR_NEMESIS_G;
+	b = ZP_COLOR_NEMESIS_B;
 
 	cvar_nemesis_damage = register_cvar("zp_nemesis_damage", "2.0")
 	cvar_nemesis_kill_explode = register_cvar("zp_nemesis_kill_explode", "1")
@@ -354,10 +355,6 @@ public zp_fw_core_infect_post(id, attacker)
 	// Apply Nemesis attributes?
 	if (!flag_get(g_IsNemesis, id))
 		return;
-
-	r = get_pcvar_num(cvar_nemesis_color[0])
-	g = get_pcvar_num(cvar_nemesis_color[1])
-	b = get_pcvar_num(cvar_nemesis_color[2])
 
 	flag_unset(g_IsMutated, id)
 	

@@ -15,6 +15,7 @@
 #include <zp50_gamemodes>
 #include <zp50_class_nemesis>
 #include <zp50_deathmatch>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -50,9 +51,10 @@ public plugin_precache()
 	cvar_nemesis_show_hud = register_cvar("zp_nemesis_show_hud", "1")
 	cvar_nemesis_sounds = register_cvar("zp_nemesis_sounds", "1")
 	cvar_nemesis_allow_respawn = register_cvar("zp_nemesis_allow_respawn", "0")
-	cvar_nemesis_color[0] = register_cvar("zp_nemesis_color_R", "255")
-	cvar_nemesis_color[1] = register_cvar("zp_nemesis_color_G", "255")
-	cvar_nemesis_color[2] = register_cvar("zp_nemesis_color_B", "0")
+
+	cvar_nemesis_color[0] = ZP_COLOR_NEMESIS_R;
+	cvar_nemesis_color[1] = ZP_COLOR_NEMESIS_G;
+	cvar_nemesis_color[2] = ZP_COLOR_NEMESIS_B;
 	
 	// Initialize arrays
 	g_sound_nemesis = ArrayCreate(SOUND_MAX_LENGTH, 1)

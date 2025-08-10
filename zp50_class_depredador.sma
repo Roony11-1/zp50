@@ -25,6 +25,7 @@
 #include <zp50_grenade_frost>
 #define LIBRARY_GRENADE_FIRE "zp50_grenade_fire"
 #include <zp50_grenade_fire>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -64,7 +65,7 @@ new g_IsDepredador
 
 new cvar_depredador_health, cvar_depredador_base_health, cvar_depredador_speed, cvar_depredador_gravity
 new cvar_depredador_glow
-new cvar_depredador_aura, cvar_depredador_color[3], r, g, b
+new cvar_depredador_aura, r, g, b
 new cvar_depredador_damage, cvar_depredador_kill_explode
 new cvar_depredador_grenade_frost, cvar_depredador_grenade_fire
 
@@ -89,14 +90,10 @@ public plugin_init()
 	cvar_depredador_gravity = register_cvar("zp_depredador_gravity", "0.5")
 	cvar_depredador_glow = register_cvar("zp_depredador_glow", "0")
 	cvar_depredador_aura = register_cvar("zp_depredador_aura", "0")
-	// Color
-	cvar_depredador_color[0] = register_cvar("zp_depredador_color_R", "255")
-	cvar_depredador_color[1] = register_cvar("zp_depredador_color_G", "180")
-	cvar_depredador_color[2] = register_cvar("zp_depredador_color_B", "60")
 
-	r = get_pcvar_num(cvar_depredador_color[0])
-	g = get_pcvar_num(cvar_depredador_color[1])
-	b = get_pcvar_num(cvar_depredador_color[2])
+	r = ZP_COLOR_DEPREDADOR_R;
+	g = ZP_COLOR_DEPREDADOR_G;
+	b = ZP_COLOR_DEPREDADOR_B;
 
 	cvar_depredador_damage = register_cvar("zp_depredador_damage", "3.25")
 	cvar_depredador_kill_explode = register_cvar("zp_depredador_kill_explode", "1")
@@ -480,7 +477,7 @@ public zp_fw_core_infect_post(id, attacker)
 	
 	// Depredador glow
 	if (get_pcvar_num(cvar_depredador_glow))
-		set_user_rendering(id, kRenderFxGlowShell, get_pcvar_num(cvar_depredador_color[0]), get_pcvar_num(cvar_depredador_color[1]), get_pcvar_num(cvar_depredador_color[2]), kRenderNormal, 25)
+		set_user_rendering(id, kRenderFxGlowShell, r, g, b, kRenderNormal, 25)
 	
 	// Depredador aura task
 	if (get_pcvar_num(cvar_depredador_aura))

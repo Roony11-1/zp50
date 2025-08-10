@@ -18,6 +18,7 @@
 #include <zp50_class_depredador>
 #include <zp50_core>
 #include <zp50_effects>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -56,7 +57,6 @@ new cvar_infect_hud_icon
 new cvar_infect_tracers
 new cvar_infect_particles
 new cvar_infect_sparkle
-new cvar_zombie_color[3], cvar_nemesis_color[3], cvar_depredador_color[3]
 
 public plugin_init()
 {
@@ -67,24 +67,6 @@ public plugin_init()
 	g_MsgDamage = get_user_msgid("Damage")
 
 	g_syncHud = CreateHudSyncObj()
-
-	cvar_zombie_color[0] = register_cvar("zp_zombie_color_R", "0")
-	cvar_zombie_color[1] = register_cvar("zp_zombie_color_G", "150")
-	cvar_zombie_color[2] = register_cvar("zp_zombie_color_B", "0")
-	// Nemesis Class loaded?
-	if (LibraryExists(LIBRARY_NEMESIS, LibType_Library))
-	{
-		cvar_nemesis_color[0] = register_cvar("zp_nemesis_color_R", "255")
-		cvar_nemesis_color[1] = register_cvar("zp_nemesis_color_G", "0")
-		cvar_nemesis_color[2] = register_cvar("zp_nemesis_color_B", "255")
-	}
-	// Depredador Class loaded?
-	if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library))
-	{
-		cvar_depredador_color[0] = register_cvar("zp_depredador_color_R", "150")
-		cvar_depredador_color[1] = register_cvar("zp_depredador_color_G", "0")
-		cvar_depredador_color[2] = register_cvar("zp_depredador_color_B", "0")
-	}
 	
 	cvar_infect_show_hud = register_cvar("zp_infect_show_hud", "1")
 	cvar_infect_show_notice = register_cvar("zp_infect_show_notice", "1")
@@ -192,21 +174,21 @@ infection_effects(id)
     new r, g, b;
     if (LibraryExists(LIBRARY_NEMESIS, LibType_Library) && zp_class_nemesis_get(id))
     {
-        r = get_pcvar_num(cvar_nemesis_color[0]);
-        g = get_pcvar_num(cvar_nemesis_color[1]);
-        b = get_pcvar_num(cvar_nemesis_color[2]);
+		r = ZP_COLOR_NEMESIS_R;
+		g = ZP_COLOR_NEMESIS_G;
+		b = ZP_COLOR_NEMESIS_B;
     }
     else if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library) && zp_class_depredador_get(id))
     {
-        r = get_pcvar_num(cvar_depredador_color[0]);
-        g = get_pcvar_num(cvar_depredador_color[1]);
-        b = get_pcvar_num(cvar_depredador_color[2]);
+		r = ZP_COLOR_DEPREDADOR_R;
+		g = ZP_COLOR_DEPREDADOR_G;
+		b = ZP_COLOR_DEPREDADOR_B;
     }
     else
     {
-        r = get_pcvar_num(cvar_zombie_color[0]);
-        g = get_pcvar_num(cvar_zombie_color[1]);
-        b = get_pcvar_num(cvar_zombie_color[2]);
+        r = ZP_COLOR_ZOMBIE_R;
+        g = ZP_COLOR_ZOMBIE_G;
+        b = ZP_COLOR_ZOMBIE_B;
     }
 
     // Screen fade?

@@ -15,6 +15,7 @@
 #include <zp50_gamemodes>
 #include <zp50_class_depredador>
 #include <zp50_deathmatch>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -50,9 +51,10 @@ public plugin_precache()
 	cvar_depredador_show_hud = register_cvar("zp_depredador_show_hud", "1")
 	cvar_depredador_sounds = register_cvar("zp_depredador_sounds", "1")
 	cvar_depredador_allow_respawn = register_cvar("zp_depredador_allow_respawn", "0")
-	cvar_depredador_color[0] = register_cvar("zp_depredador_color_R", "255")
-	cvar_depredador_color[1] = register_cvar("zp_depredador_color_G", "180")
-	cvar_depredador_color[2] = register_cvar("zp_depredador_color_B", "60")
+
+	cvar_depredador_color[0] = ZP_COLOR_DEPREDADOR_R;
+	cvar_depredador_color[1] = ZP_COLOR_DEPREDADOR_G;
+	cvar_depredador_color[2] = ZP_COLOR_DEPREDADOR_B;
 	
 	// Initialize arrays
 	g_sound_depredador = ArrayCreate(SOUND_MAX_LENGTH, 1)

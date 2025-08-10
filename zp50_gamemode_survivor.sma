@@ -14,6 +14,7 @@
 #include <zp50_gamemodes>
 #include <zp50_class_survivor>
 #include <zp50_deathmatch>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -49,9 +50,10 @@ public plugin_precache()
 	cvar_survivor_show_hud = register_cvar("zp_survivor_show_hud", "1")
 	cvar_survivor_sounds = register_cvar("zp_survivor_sounds", "1")
 	cvar_survivor_allow_respawn = register_cvar("zp_survivor_allow_respawn", "0")
-	cvar_survivor_color[0] = register_cvar("zp_survivor_color_R", "0")
-	cvar_survivor_color[1] = register_cvar("zp_survivor_color_G", "255")
-	cvar_survivor_color[2] = register_cvar("zp_survivor_color_B", "255")
+
+	cvar_survivor_color[0] = ZP_COLOR_SURVIVOR_R;
+	cvar_survivor_color[1] = ZP_COLOR_SURVIVOR_G;
+	cvar_survivor_color[2] = ZP_COLOR_SURVIVOR_B;
 	
 	// Initialize arrays
 	g_sound_survivor = ArrayCreate(SOUND_MAX_LENGTH, 1)

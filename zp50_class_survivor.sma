@@ -20,6 +20,7 @@
 #include <cs_weap_models_api>
 #include <cs_ham_bots_api>
 #include <zp50_core>
+#include <zp50_color_const>
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -72,7 +73,7 @@ new g_Strip
 
 new cvar_survivor_health, cvar_survivor_base_health, cvar_survivor_speed, cvar_survivor_gravity
 new cvar_survivor_glow
-new cvar_survivor_aura, cvar_survivor_color[3]
+new cvar_survivor_aura, r, g, b
 new cvar_survivor_weapon, cvar_survivor_weapon_block
 
 public plugin_init()
@@ -97,9 +98,11 @@ public plugin_init()
 	cvar_survivor_gravity = register_cvar("zp_survivor_gravity", "1.25")
 	cvar_survivor_glow = register_cvar("zp_survivor_glow", "1")
 	cvar_survivor_aura = register_cvar("zp_survivor_aura", "1")
-	cvar_survivor_color[0] = register_cvar("zp_survivor_color_R", "0")
-	cvar_survivor_color[1] = register_cvar("zp_survivor_color_G", "255")
-	cvar_survivor_color[2] = register_cvar("zp_survivor_color_B", "255")
+
+	r = ZP_COLOR_SURVIVOR_R;
+	g = ZP_COLOR_SURVIVOR_G;
+	b = ZP_COLOR_SURVIVOR_B;
+
 	cvar_survivor_weapon = register_cvar("zp_survivor_weapon", "weapon_mp5navy")
 	cvar_survivor_weapon_block = register_cvar("zp_survivor_weapon_block", "1")
 }
@@ -317,7 +320,7 @@ public zp_fw_core_cure_post(id, attacker)
 	
 	// Survivor glow
 	if (get_pcvar_num(cvar_survivor_glow))
-		set_user_rendering(id, kRenderFxGlowShell, get_pcvar_num(cvar_survivor_color[0]), get_pcvar_num(cvar_survivor_color[1]), get_pcvar_num(cvar_survivor_color[2]), kRenderNormal, 25)
+		set_user_rendering(id, kRenderFxGlowShell, r, g, b, kRenderNormal, 25)
 	
 	// Survivor aura task
 	if (get_pcvar_num(cvar_survivor_aura))
@@ -417,9 +420,9 @@ public survivor_aura(taskid)
 	write_coord(origin[1]) // y
 	write_coord(origin[2]) // z
 	write_byte(15) // radius
-	write_byte(get_pcvar_num(cvar_survivor_color[0])) // r
-	write_byte(get_pcvar_num(cvar_survivor_color[1])) // g
-	write_byte(get_pcvar_num(cvar_survivor_color[2])) // b
+	write_byte(r) // r
+	write_byte(g) // g
+	write_byte(b) // b
 	write_byte(2) // life
 	write_byte(0) // decay rate
 	message_end()

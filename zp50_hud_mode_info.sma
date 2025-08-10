@@ -1,5 +1,6 @@
-#include < amxmodx >
-#include < zp50_gamemodes >
+#include <amxmodx>
+#include <zp50_gamemodes>
+#include <zp50_color_const>
 
 new g_desc[128];
 new r, g, b
@@ -17,25 +18,25 @@ public plugin_init()
     register_event("HLTV", "event_hltv", "a", "1=0", "2=0");
 
 	// Zombie
-    cvar_zombie_color[0] = register_cvar("zp_zombie_color_R", "0")
-    cvar_zombie_color[1] = register_cvar("zp_zombie_color_G", "150")
-    cvar_zombie_color[2] = register_cvar("zp_zombie_color_B", "0")
+	cvar_zombie_color[0] = ZP_COLOR_ZOMBIE_R;
+	cvar_zombie_color[1] = ZP_COLOR_ZOMBIE_G;
+	cvar_zombie_color[2] = ZP_COLOR_ZOMBIE_B;
 	// Human
-    cvar_human_color[0] = register_cvar("zp_human_color_R", "0")
-    cvar_human_color[1] = register_cvar("zp_human_color_G", "150")
-    cvar_human_color[2] = register_cvar("zp_human_color_B", "150")
-	
-    cvar_nemesis_color[0] = register_cvar("zp_nemesis_color_R", "150")
-    cvar_nemesis_color[1] = register_cvar("zp_nemesis_color_G", "0")
-    cvar_nemesis_color[2] = register_cvar("zp_nemesis_color_B", "0")
-
-    cvar_depredador_color[0] = register_cvar("zp_depredador_color_R", "150")
-    cvar_depredador_color[1] = register_cvar("zp_depredador_color_G", "0")
-    cvar_depredador_color[2] = register_cvar("zp_depredador_color_B", "0")
-	
-    cvar_survivor_color[0] = register_cvar("zp_survivor_color_R", "0")
-    cvar_survivor_color[1] = register_cvar("zp_survivor_color_G", "0")
-    cvar_survivor_color[2] = register_cvar("zp_survivor_color_B", "150")
+	cvar_human_color[0] = ZP_COLOR_HUMAN_R;
+	cvar_human_color[1] = ZP_COLOR_HUMAN_G;
+	cvar_human_color[2] = ZP_COLOR_HUMAN_B;
+	// Nemesis Class
+	cvar_nemesis_color[0] = ZP_COLOR_NEMESIS_R;
+	cvar_nemesis_color[1] = ZP_COLOR_NEMESIS_G;
+	cvar_nemesis_color[2] = ZP_COLOR_NEMESIS_B;
+	// Depredador Class
+	cvar_depredador_color[0] = ZP_COLOR_DEPREDADOR_R;
+	cvar_depredador_color[1] = ZP_COLOR_DEPREDADOR_G;
+	cvar_depredador_color[2] = ZP_COLOR_DEPREDADOR_B;
+	// Survivor Class
+	cvar_survivor_color[0] = ZP_COLOR_SURVIVOR_R;
+	cvar_survivor_color[1] = ZP_COLOR_SURVIVOR_G;
+	cvar_survivor_color[2] = ZP_COLOR_SURVIVOR_B;
     
     formatex(g_desc, charsmax(g_desc), "Iniciando Modalidad...");
     r = 255

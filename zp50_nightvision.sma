@@ -23,6 +23,7 @@
 #include <zp50_class_depredador>
 #define LIBRARY_ZOMBIE_MADNESS "zp50_item_zombie_madness"
 #include <zp50_item_zombie_madness>
+#include <zp50_color_const>
 
 #define TASK_NIGHTVISION 100
 #define ID_NIGHTVISION (taskid - TASK_NIGHTVISION)
@@ -63,49 +64,49 @@ public plugin_init()
 	
 	// Zombie
 	cvar_nvision_zombie = register_cvar("zp_nvision_zombie", "2") // 1-give only // 2-give and enable
-	cvar_zombie_color[0] = register_cvar("zp_zombie_color_R", "0")
-	cvar_zombie_color[1] = register_cvar("zp_zombie_color_G", "150")
-	cvar_zombie_color[2] = register_cvar("zp_zombie_color_B", "0")
+	cvar_zombie_color[0] = ZP_COLOR_ZOMBIE_R;
+	cvar_zombie_color[1] = ZP_COLOR_ZOMBIE_G;
+	cvar_zombie_color[2] = ZP_COLOR_ZOMBIE_B;
 
-	cvar_madness_color[0] = register_cvar("zp_madness_aura_color_R", "150")
-	cvar_madness_color[1] = register_cvar("zp_madness_aura_color_G", "0")
-	cvar_madness_color[2] = register_cvar("zp_madness_aura_color_B", "0")
+	cvar_madness_color[0] = ZP_COLOR_MADNESS_R;
+	cvar_madness_color[1] = ZP_COLOR_MADNESS_G;
+	cvar_madness_color[2] = ZP_COLOR_MADNESS_B;
 	// Human
 	cvar_nvision_human = register_cvar("zp_nvision_human", "0") // 1-give only // 2-give and enable
-	cvar_human_color[0] = register_cvar("zp_human_color_R", "0")
-	cvar_human_color[1] = register_cvar("zp_human_color_G", "150")
-	cvar_human_color[2] = register_cvar("zp_human_color_B", "150")
+	cvar_human_color[0] = ZP_COLOR_HUMAN_R;
+	cvar_human_color[1] = ZP_COLOR_HUMAN_G;
+	cvar_human_color[2] = ZP_COLOR_HUMAN_B;
 	// Spec
 	cvar_nvision_spec = register_cvar("zp_nvision_spec", "2") // 1-give only // 2-give and enable
-	cvar_spec_color[0] = register_cvar("zp_spec_color_R", "150")
-	cvar_spec_color[1] = register_cvar("zp_spec_color_G", "150")
-	cvar_spec_color[2] = register_cvar("zp_spec_color_B", "150")
+	cvar_spec_color[0] = ZP_COLOR_SPECT
+	cvar_spec_color[1] = ZP_COLOR_SPECT
+	cvar_spec_color[2] = ZP_COLOR_SPECT
 	
 	// Nemesis Class loaded?
 	if (LibraryExists(LIBRARY_NEMESIS, LibType_Library))
 	{
 		cvar_nvision_nemesis = register_cvar("zp_nvision_nemesis", "2")
-		cvar_nemesis_color[0] = register_cvar("zp_nemesis_color_R", "255")
-		cvar_nemesis_color[1] = register_cvar("zp_nemesis_color_G", "0")
-		cvar_nemesis_color[2] = register_cvar("zp_nemesis_color_B", "255")
+		cvar_nemesis_color[0] = ZP_COLOR_NEMESIS_R;
+		cvar_nemesis_color[1] = ZP_COLOR_NEMESIS_G;
+		cvar_nemesis_color[2] = ZP_COLOR_NEMESIS_B;
 	}
 
 	// Depredador Class loaded?
 	if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library))
 	{
 		cvar_nvision_depredador = register_cvar("zp_nvision_depredador", "2")
-		cvar_depredador_color[0] = register_cvar("zp_depredador_color_R", "150")
-		cvar_depredador_color[1] = register_cvar("zp_depredador_color_G", "0")
-		cvar_depredador_color[2] = register_cvar("zp_depredador_color_B", "0")
+		cvar_depredador_color[0] = ZP_COLOR_DEPREDADOR_R;
+		cvar_depredador_color[1] = ZP_COLOR_DEPREDADOR_G;
+		cvar_depredador_color[2] = ZP_COLOR_DEPREDADOR_B;
 	}
 	
 	// Survivor Class loaded?
 	if (LibraryExists(LIBRARY_SURVIVOR, LibType_Library))
 	{
 		cvar_nvision_survivor = register_cvar("zp_nvision_survivor", "0")
-		cvar_survivor_color[0] = register_cvar("zp_survivor_color_R", "0")
-		cvar_survivor_color[1] = register_cvar("zp_survivor_color_G", "0")
-		cvar_survivor_color[2] = register_cvar("zp_survivor_color_B", "150")
+		cvar_survivor_color[0] = ZP_COLOR_SURVIVOR_R;
+		cvar_survivor_color[1] = ZP_COLOR_SURVIVOR_G;
+		cvar_survivor_color[2] = ZP_COLOR_SURVIVOR_B;
 	}
 }
 

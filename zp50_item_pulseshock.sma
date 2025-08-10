@@ -6,6 +6,7 @@
 #include <zp50_items>
 #include <zp50_stocks>
 #include <zp50_effects>
+#include <zp50_color_const>
 
 #define ITEM_NAME "Pulse Shock"
 #define ITEM_COST 0
@@ -30,9 +31,9 @@ public plugin_init()
     g_ItemID = zp_items_register(ITEM_NAME, ITEM_COST);
 
     // CVARs para color
-    cvar_pulse_color[0] = register_cvar("zp_pulse_color_R", "0");
-    cvar_pulse_color[1] = register_cvar("zp_pulse_color_G", "255");
-    cvar_pulse_color[2] = register_cvar("zp_pulse_color_B", "255");
+    cvar_pulse_color[0] = ZP_COLOR_PULSES_R;
+    cvar_pulse_color[1] = ZP_COLOR_PULSES_G;
+    cvar_pulse_color[2] = ZP_COLOR_PULSES_B;
 
     register_event("DeathMsg", "event_death", "a");
     register_clcmd("pulse", "pulsecmd");

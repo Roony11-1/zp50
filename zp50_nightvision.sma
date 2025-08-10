@@ -78,9 +78,9 @@ public plugin_init()
 	cvar_human_color[2] = ZP_COLOR_HUMAN_B;
 	// Spec
 	cvar_nvision_spec = register_cvar("zp_nvision_spec", "2") // 1-give only // 2-give and enable
-	cvar_spec_color[0] = ZP_COLOR_SPECT
-	cvar_spec_color[1] = ZP_COLOR_SPECT
-	cvar_spec_color[2] = ZP_COLOR_SPECT
+	cvar_spec_color[0] = ZP_COLOR_SPECT;
+	cvar_spec_color[1] = ZP_COLOR_SPECT;
+	cvar_spec_color[2] = ZP_COLOR_SPECT;
 	
 	// Nemesis Class loaded?
 	if (LibraryExists(LIBRARY_NEMESIS, LibType_Library))

@@ -2,11 +2,16 @@
 #include <engine>
 #include <fun>
 #include <fakemeta>
+#include <hamsandwich>
+#include <cs_ham_bots_api>
 #include <zp50_core>
 #include <zp50_items>
 #include <zp50_stocks>
 #include <zp50_effects>
 #include <zp50_color_const>
+
+#define PLUGIN_NAME "[ZP] Item: Pulse Shock"
+#define PLUGIN_AUTOR "ricardo"
 
 #define ITEM_NAME "Pulse Shock"
 #define ITEM_COST 0
@@ -27,8 +32,12 @@ new g_PulseCount[33];
 
 public plugin_init()
 {
-    register_plugin("[ZP] Item: Pulse Shock", ZP_VERSION_STRING, "ricardo");
+    register_plugin(PLUGIN_NAME, ZP_VERSION_STRING, PLUGIN_AUTOR);
+
     g_ItemID = zp_items_register(ITEM_NAME, ITEM_COST);
+
+    RegisterHam(Ham_TakeDamage, "player", "fw_TakeDamage")
+	RegisterHamBots(Ham_TakeDamage, "fw_TakeDamage")
 
     // CVARs para color
     cvar_pulse_color[0] = ZP_COLOR_PULSES_R;
@@ -43,6 +52,28 @@ public plugin_precache()
 {
     sprite_beam = precache_model("sprites/laserbeam.spr");
     precache_sound(g_sound_pulse);
+}
+
+public fw_TakeDamage(victim, inflictor, attacker, Float:damage, damage_type)
+{
+    if (!is_user_alive(id))
+        return HAM_IGNORED;
+
+	if (zp_core_is_zombie(victim))
+		return HAM_IGNORED;
+
+    // Evitar auto-daño o si el atacante no está vivo
+	if (victim == attacker || !is_user_alive(attacker))
+		return HAM_IGNORED;
+
+	// Lógica para bots
+	if (is_user_bot(victim) && zp_core_is_zombie(attacker))
+	{
+		zp_try_activate_random(victim, 15.0, "pulsecmd", PLUGIN_NAME);
+		return FMRES_IGNORED;
+	}
+
+    return HAM_IGNORED;
 }
 
 //==================================================
@@ -84,7 +115,10 @@ public pulsecmd(id)
     if (!is_user_alive(id))
         return PLUGIN_HANDLED;
 
-    if (!g_HasPulse[id])
+    if (zp_is_super_class(id))
+        return PLUGIN_HANDLED;
+
+    if (!is_user_bot(id) && !g_HasPulse[id])
         return PLUGIN_HANDLED;
 
     efectoPulse(id);

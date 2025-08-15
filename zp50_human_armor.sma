@@ -124,12 +124,7 @@ public fw_TakeDamage(victim, inflictor, attacker, Float:damage, damage_type)
 		if (!get_pcvar_num(cvar_human_armor_protect))
 			return HAM_IGNORED;
 
-		// ¿Está atacando un Némesis?
-		if (LibraryExists(LIBRARY_NEMESIS, LibType_Library) && !get_pcvar_num(cvar_armor_protect_nemesis) && zp_class_nemesis_get(attacker))
-			return HAM_IGNORED;
-
-		// ¿Está atacando un Depredador?
-		if (LibraryExists(LIBRARY_DEPREDADOR, LibType_Library) && !get_pcvar_num(cvar_armor_protect_nemesis) && zp_class_depredador_get(attacker))
+		if (zp_is_super_class(attacker))
 			return HAM_IGNORED;
 
 		// ¿La víctima es sobreviviente?

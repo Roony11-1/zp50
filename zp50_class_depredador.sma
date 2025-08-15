@@ -26,6 +26,10 @@
 #define LIBRARY_GRENADE_FIRE "zp50_grenade_fire"
 #include <zp50_grenade_fire>
 #include <zp50_color_const>
+#include <zp50_stocks>
+
+#define PLUGIN_NAME "[ZP] Class: Depredador"
+#define PLUGIN_AUTOR "ricardo"
 
 // Settings file
 new const ZP_SETTINGS_FILE[] = "zombieplague.ini"
@@ -71,7 +75,7 @@ new cvar_depredador_grenade_frost, cvar_depredador_grenade_fire
 
 public plugin_init()
 {
-	register_plugin("[ZP] Class: Depredador", ZP_VERSION_STRING, "ZP Dev Team")
+	register_plugin(PLUGIN_NAME, ZP_VERSION_STRING, PLUGIN_AUTOR)
 	
 	RegisterHam(Ham_TakeDamage, "player", "fw_TakeDamage")
 	RegisterHamBots(Ham_TakeDamage, "fw_TakeDamage")
@@ -212,8 +216,10 @@ public fw_ClientDisconnect_Post(id)
 	flag_unset(g_IsDepredador, id)
 }
 
-activar_invisibilidad(id, Float:current_time)
+public activar_invisibilidad(id)
 {
+	new Float:current_time = get_gametime();
+
 	if (g_IsInvisible[id])
 	{
 		new Float:remaining = (g_NextInvisibilityTime[id] - INVISIBILITY_COOLDOWN) + INVISIBILITY_TIME - current_time;
@@ -254,12 +260,11 @@ public fw_CmdStart(id, uc_handle, seed)
 
 	static buttons;
 	buttons = get_uc(uc_handle, UC_Buttons);
-	new Float:current_time = get_gametime();
 
 	// Lógica para jugador humano al presionar RELOAD
 	if ((buttons & IN_RELOAD) && !(g_LastButton[id] & IN_RELOAD))
 	{
-		activar_invisibilidad(id, current_time);
+		activar_invisibilidad(id);
 	}
 
 	g_LastButton[id] = buttons;
@@ -341,14 +346,8 @@ public fw_TakeDamage(victim, inflictor, attacker, Float:damage, damage_type)
 		{
 			// Esperamos que ya puedan volverse invisibles
 			if (!g_IsInvisible[victim] && current_time >= g_NextInvisibilityTime[victim])
-			{
-				// Le damos una probabilidad de activarla
-				if (random_num(1, 100) <= 35)
-				{
-					// También podrías agregar chequeo de vida o enemigos cerca aquí
-					activar_invisibilidad(victim, current_time);
-				}
-			}
+				zp_try_activate_random(victim, 55.0, "activar_invisibilidad", PLUGIN_NAME);
+
 			return FMRES_IGNORED;
 		}
 	}
@@ -576,7 +575,7 @@ GetDepredadorCount()
 quitarInvisibilidad(id)
 {
 	g_IsInvisible[id] = false;
-	g_NextInvisibilityTime[id] = 0;
+	g_NextInvisibilityTime[id] = 0.0;
 
 	set_user_rendering(id)              // Restaurar apariencia normal
 	remove_task(id + TASK_INVIS)        // Cancelar tarea si aún está activa

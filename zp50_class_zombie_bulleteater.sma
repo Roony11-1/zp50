@@ -19,6 +19,9 @@
 #include <zp50_stocks>
 #include <zp50_item_zombie_madness>
 
+#define PLUGIN_NAME "[ZP] Class: Zombie: Bulleteater"
+#define PLUGIN_AUTOR "ricardo"
+
 #define ABILITY_TIME 7.0 // Tiempo en segundos
 #define ABILITY_COOLDOWN (ABILITY_TIME + 15.0) // Tiempo de espera entre usos
 
@@ -50,7 +53,7 @@ new g_ZombieClassID
 
 public plugin_precache()
 {
-    register_plugin("[ZP] Class: Zombie: Bulleteater", ZP_VERSION_STRING, "ricardo")
+    register_plugin(PLUGIN_NAME, ZP_VERSION_STRING, PLUGIN_AUTOR)
 
 	register_forward(FM_CmdStart, "fw_CmdStart")
 
@@ -165,12 +168,11 @@ public fw_CmdStart(id, uc_handle, seed)
 
 	static buttons;
 	buttons = get_uc(uc_handle, UC_Buttons);
-	new Float:current_time = get_gametime();
 
 	// Lógica para jugador humano al presionar RELOAD
 	if ((buttons & IN_RELOAD) && !(g_LastButton[id] & IN_RELOAD))
 	{
-		activar_habilidad(id, current_time);
+		activar_habilidad(id);
 	}
 
 	g_LastButton[id] = buttons;
@@ -178,10 +180,12 @@ public fw_CmdStart(id, uc_handle, seed)
 	return FMRES_IGNORED;
 }
 
-activar_habilidad(id, Float:current_time)
+public activar_habilidad(id)
 {
 	if (!zp_core_is_zombie(id) || zp_is_super_class(id))
 		return;
+
+	new Float:current_time = get_gametime();
 
 	if (g_IsActived[id])
 	{
@@ -248,27 +252,24 @@ public fw_TakeDamage(victim, inflictor, attacker, Float:damage, damage_type)
 	if (victim == attacker || !is_user_alive(attacker))
 		return HAM_IGNORED;
 
+	new Float:current_time = get_gametime();
+
     // Filtrar solo daño de balas
     if (!(damage_type & DMG_BULLET))
         return HAM_IGNORED;
 
-    new Float:current_time = get_gametime();
-
-    if (g_IsBullet[victim])
-    {
-        // Lógica para bots
-        if (is_user_bot(victim))
-        {
-            if (!g_IsActived[victim] && current_time >= g_NextAbilityTime[victim])
-            {
-                if (random_num(1, 100) <= 35)
-                {
-                    activar_habilidad(victim, current_time);
-                }
-            }
-            return FMRES_IGNORED;
-        }
-    }
+	if (g_IsBullet[victim])
+	{
+		// Lógica para bots
+		if (is_user_bot(victim))
+		{
+			if (!g_IsActived[victim] && current_time >= g_NextAbilityTime[victim])
+			{
+				zp_try_activate_random(victim, 75.0, "activar_habilidad", PLUGIN_NAME);
+			}
+			return FMRES_IGNORED;
+		}
+	}
 
     return HAM_IGNORED;
 }

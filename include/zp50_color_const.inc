@@ -5,8 +5,8 @@
 #define ZP_COLOR_DEPREDADOR_B 60
 // Class: Nemesis
 #define ZP_COLOR_NEMESIS_R 255
-#define ZP_COLOR_NEMESIS_G 180
-#define ZP_COLOR_NEMESIS_B 60
+#define ZP_COLOR_NEMESIS_G 0
+#define ZP_COLOR_NEMESIS_B 255
 // Class: Zombie
 #define ZP_COLOR_ZOMBIE_R 0
 #define ZP_COLOR_ZOMBIE_G 150
